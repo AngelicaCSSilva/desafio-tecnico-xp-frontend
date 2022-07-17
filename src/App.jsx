@@ -4,15 +4,18 @@ import './App.css';
 import Bank from './components/pages/Bank';
 import Login from './components/pages/Login';
 import Stocks from './components/pages/Stocks';
+import FinanceProvider from './context/FinanceProvider';
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/stocks" element={<Stocks />} />
-        <Route path="/bank" element={<Bank />} />
-      </Routes>
+      <FinanceProvider>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/stocks" element={<Stocks />} />
+          <Route path="/bank" element={<Bank />} />
+        </Routes>
+      </FinanceProvider>
     </div>
   );
 }
