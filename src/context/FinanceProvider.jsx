@@ -5,12 +5,14 @@ import FinanceContext from './FinanceContext';
 
 function FinanceProvider({ children }) {
   const [bankTransitions, setBankTransitions] = useState(null);
+  const [investments, setInvestments] = useState(null);
 
   const { Provider } = FinanceContext;
   return (
     <Provider
       value={{
         bankTransitions,
+        investments,
       }}
     >
       {children}
