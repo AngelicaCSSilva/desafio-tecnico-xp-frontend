@@ -29,10 +29,9 @@ export default function LoginForm() {
 
   return (
     <CenteredForm>
-      <StyledLabel htmlFor="emailInput">
+      <StyledLabel htmlFor="email">
         Email:
         <input
-          data-testid="email-input"
           id="email"
           type="text"
           value={user.email}
@@ -42,10 +41,9 @@ export default function LoginForm() {
             }
         />
       </StyledLabel>
-      <StyledLabel htmlFor="passwordInput">
+      <StyledLabel htmlFor="password">
         Senha:
         <input
-          data-testid="password-input"
           id="password"
           type="password"
           value={user.password}
@@ -57,7 +55,6 @@ export default function LoginForm() {
       </StyledLabel>
       <button
         type="button"
-        data-testid="login-submit-btn"
         disabled={validateForm()}
         onClick={handleClickButton}
       >
