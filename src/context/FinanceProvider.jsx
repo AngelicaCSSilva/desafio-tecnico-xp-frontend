@@ -6,6 +6,8 @@ import FinanceContext from './FinanceContext';
 function FinanceProvider({ children }) {
   const [bankTransitions, setBankTransitions] = useState(null);
   const [investments, setInvestments] = useState(null);
+  const [userEmail, setUserEmail] = useState('');
+  const [userId, setUserId] = useState('');
 
   const { Provider } = FinanceContext;
   return (
@@ -13,6 +15,8 @@ function FinanceProvider({ children }) {
       value={{
         bankTransitions,
         investments,
+        userEmail,
+        setUserEmail,
       }}
     >
       {children}
