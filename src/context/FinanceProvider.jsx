@@ -23,6 +23,13 @@ function FinanceProvider({ children }) {
         setInvestments(response.data.filter((user) => user.userId === userId)[0]);
       });
   };
+
+  const getBankTransitions = () => {
+    axios.get('/data/bankTransitions.json')
+      .then((response) => {
+        setBankTransitions(response.data.filter((user) => user.userId === userId)[0]);
+      });
+  };
   const { Provider } = FinanceContext;
   return (
     <Provider
