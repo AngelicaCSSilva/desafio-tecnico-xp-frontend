@@ -30,6 +30,10 @@ function FinanceProvider({ children }) {
         setBankTransitions(response.data.filter((user) => user.userId === userId)[0]);
       });
   };
+
+  const generateGlobalState = () => {
+    getUserId();
+  };
   const { Provider } = FinanceContext;
   return (
     <Provider
@@ -38,6 +42,7 @@ function FinanceProvider({ children }) {
         investments,
         userEmail,
         setUserEmail,
+        generateGlobalState,
         isFetching,
       }}
     >
