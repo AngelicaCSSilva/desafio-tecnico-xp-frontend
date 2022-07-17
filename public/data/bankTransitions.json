@@ -1,0 +1,18 @@
+[
+  {
+    "userId": 1,
+    "balance": 200,
+    "transitions": [
+      {
+        "date": "2022-07-19T06:34:00.871Z",
+        "description": "Depósito",
+        "total": 210
+      },
+      {
+        "date": "2022-07-16T06:35:00.871Z",
+        "description": "Retirada",
+        "total": 10
+      }
+    ]
+  }
+]
