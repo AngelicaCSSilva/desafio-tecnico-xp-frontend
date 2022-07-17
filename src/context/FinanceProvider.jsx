@@ -34,6 +34,13 @@ function FinanceProvider({ children }) {
   const generateGlobalState = () => {
     getUserId();
   };
+
+  useEffect(() => {
+    getInvestments();
+    getBankTransitions();
+    setIsFetching(false);
+  }, [userId]);
+
   const { Provider } = FinanceContext;
   return (
     <Provider
