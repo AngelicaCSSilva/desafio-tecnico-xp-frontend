@@ -1,7 +1,12 @@
 import React from 'react';
+import LoginForm from '../forms/LoginForm';
+import Logo from '../img/Logo';
 
 export default function Login() {
   return (
-    <h1>Login</h1>
+    <>
+      <Logo width="120" />
+      <LoginForm />
+    </>
   );
 }
