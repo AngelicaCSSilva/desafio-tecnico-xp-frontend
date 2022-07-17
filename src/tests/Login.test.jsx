@@ -21,4 +21,21 @@ it('An login button appears on the screen.', () => {
   const enterButton = screen.getByRole('button', { name: /Acessar/i });
   expect(enterButton).toBeInTheDocument();
 });
+
+it('Access button remains disabled '
++ 'when entering invalid information.', async  () => {
+  render(<Login />, {wrapper: BrowserRouter})
+
+  const emailInput = screen.getByLabelText('Email:');
+  await user.type(emailInput, 'aaa.co@m');
+  
+  const passwordInput = screen.getByLabelText('Senha:');
+  await user.type(passwordInput, '1234')
+
+  expect(emailInput).toHaveValue('aaa.co@m');
+  expect(passwordInput).toHaveValue('1234');
+
+  const enterButton = screen.getByRole('button', { name: /Acessar/i });
+  expect(enterButton).toBeDisabled();
+});
 });
