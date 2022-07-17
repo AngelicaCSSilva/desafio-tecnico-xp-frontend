@@ -8,6 +8,8 @@ function FinanceProvider({ children }) {
   const [investments, setInvestments] = useState(null);
   const [userEmail, setUserEmail] = useState('');
   const [userId, setUserId] = useState('');
+  const [isFetching, setIsFetching] = useState(true);
+
 
   const { Provider } = FinanceContext;
   return (
@@ -17,6 +19,7 @@ function FinanceProvider({ children }) {
         investments,
         userEmail,
         setUserEmail,
+        isFetching,
       }}
     >
       {children}
