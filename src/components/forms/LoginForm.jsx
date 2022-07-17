@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { getLocalStorage } from '../../utils/localStorage';
+import { useNavigate } from 'react-router-dom';
+import { getLocalStorage, saveLocalStorage } from '../../utils/localStorage';
 import { CenteredForm } from './styles/CenteredForm';
 import { StyledLabel } from './styles/StyledLabel';
 
 export default function LoginForm() {
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     email: getLocalStorage('lastUser')?.email || '',
     password: '',
@@ -14,6 +17,11 @@ export default function LoginForm() {
     const passwordMinLength = 6;
     return !(validationRegEx.test(user.email)
       && (user.password.length > passwordMinLength));
+  };
+
+  const handleClickButton = () => {
+    saveLocalStorage('lastUser', { email: user.email, lastLogin: new Date() });
+    navigate('/stocks', { replace: true });
   };
 
   return (
@@ -48,6 +56,7 @@ export default function LoginForm() {
         type="button"
         data-testid="login-submit-btn"
         disabled={validateForm()}
+        onClick={handleClickButton}
       >
         Acessar
       </button>
