@@ -17,6 +17,12 @@ function FinanceProvider({ children }) {
       });
   };
 
+  const getInvestments = () => {
+    axios.get('/data/investments.json')
+      .then((response) => {
+        setInvestments(response.data.filter((user) => user.userId === userId)[0]);
+      });
+  };
   const { Provider } = FinanceContext;
   return (
     <Provider
