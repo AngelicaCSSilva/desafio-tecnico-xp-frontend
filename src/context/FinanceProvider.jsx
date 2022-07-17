@@ -10,6 +10,12 @@ function FinanceProvider({ children }) {
   const [userId, setUserId] = useState('');
   const [isFetching, setIsFetching] = useState(true);
 
+  const getUserId = () => {
+    axios.get('/data/user.json')
+      .then((response) => {
+        setUserId(response.data.filter((user) => user.email === userEmail)[0].userId);
+      });
+  };
 
   const { Provider } = FinanceContext;
   return (
