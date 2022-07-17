@@ -9,6 +9,13 @@ export default function LoginForm() {
     password: '',
   });
 
+  const validateForm = () => {
+    const validationRegEx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordMinLength = 6;
+    return !(validationRegEx.test(user.email)
+      && (user.password.length > passwordMinLength));
+  };
+
   return (
     <CenteredForm>
       <StyledLabel htmlFor="emailInput">
@@ -40,6 +47,7 @@ export default function LoginForm() {
       <button
         type="button"
         data-testid="login-submit-btn"
+        disabled={validateForm()}
       >
         Acessar
       </button>
