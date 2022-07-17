@@ -15,4 +15,10 @@ it('An input for a password is displayed on the screen.', () => {
   const passwordInput = screen.getByRole('textbox', { id: /password/i });
   expect(passwordInput).toBeInTheDocument();
 });
+
+it('An login button appears on the screen.', () => {
+  render(<Login />, {wrapper: BrowserRouter})
+  const enterButton = screen.getByRole('button', { name: /Acessar/i });
+  expect(enterButton).toBeInTheDocument();
+});
 });
