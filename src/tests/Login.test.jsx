@@ -1,6 +1,8 @@
 import React from "react";
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react';
+import user from '@testing-library/user-event';
+import Login from "../components/pages/Login";
 import { BrowserRouter } from 'react-router-dom'
 
 describe('Login page test.', () => {
@@ -37,5 +39,24 @@ it('Access button remains disabled '
 
   const enterButton = screen.getByRole('button', { name: /Acessar/i });
   expect(enterButton).toBeDisabled();
+});
+
+it('The access button is activated '
++ 'when valid information is entered.', async  () => {
+  render(<Login />, {wrapper: BrowserRouter})
+  const enterButton = screen.getByRole('button', { name: /Acessar/i });
+  expect(enterButton).toBeDisabled();
+
+  const emailInput = screen.getByLabelText('Email:');
+  await user.type(emailInput,'teste@xp.com')
+
+  
+  const passwordInput = screen.getByLabelText('Senha:');
+  await user.type(passwordInput, '1234567')
+  
+  expect(emailInput).toHaveValue('teste@xp.com');
+  expect(passwordInput).toHaveValue('1234567');
+
+  expect(enterButton).not.toBeDisabled();
 });
 });
