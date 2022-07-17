@@ -4,11 +4,13 @@ import axios from 'axios';
 import FinanceContext from './FinanceContext';
 
 function FinanceProvider({ children }) {
+  const [bankTransitions, setBankTransitions] = useState(null);
 
   const { Provider } = FinanceContext;
   return (
     <Provider
       value={{
+        bankTransitions,
       }}
     >
       {children}
