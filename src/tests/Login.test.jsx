@@ -9,4 +9,10 @@ describe('Login page test.', () => {
     const emailInput = screen.getByRole('textbox', { id: /email/i });
     expect(emailInput).toBeInTheDocument();
   });
+
+it('An input for a password is displayed on the screen.', () => {
+  render(<Login />, {wrapper: BrowserRouter})
+  const passwordInput = screen.getByRole('textbox', { id: /password/i });
+  expect(passwordInput).toBeInTheDocument();
+});
 });
