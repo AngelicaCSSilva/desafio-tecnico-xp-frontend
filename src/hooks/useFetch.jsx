@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { useState, useEffect } from 'react';
 
 export default function useFetch(url) {
@@ -7,13 +5,11 @@ export default function useFetch(url) {
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
-    axios.get(url)
-      .then((response) => {
-        setData(response.data);
-      })
-      .finally(() => {
-        setIsFetching(false);
-      });
+    fetch(url)
+      .then((res) => res.json())
+      .then((result) => setData(result))
+      .finally(setIsFetching(false))
+      .catch((err) => console.log(err));
   }, []);
 
   return { data, isFetching };

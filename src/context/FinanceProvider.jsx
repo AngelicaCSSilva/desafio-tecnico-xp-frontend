@@ -1,34 +1,48 @@
-import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+
 import FinanceContext from './FinanceContext';
 
 function FinanceProvider({ children }) {
   const [bankTransitions, setBankTransitions] = useState(null);
   const [investments, setInvestments] = useState(null);
-  const [userEmail, setUserEmail] = useState('');
-  const [userId, setUserId] = useState('');
+  const [userEmail, setUserEmail] = useState(null);
+  const [userName, setuserName] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
 
-  const getUserId = () => {
-    axios.get('/data/user.json')
-      .then((response) => {
-        setUserId(response.data.filter((user) => user.email === userEmail)[0].userId);
-      });
+  const getUserId = async () => {
+    const url = 'https://desafiobackend-angelica.herokuapp.com/users';
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setUserId(data.filter((user) => user.email === userEmail)[0].userId);
+      setuserName(data.filter((user) => user.email === userEmail)[0].name);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const getInvestments = () => {
-    axios.get('/data/investments.json')
-      .then((response) => {
-        setInvestments(response.data.filter((user) => user.userId === userId)[0]);
-      });
+  const getInvestments = async () => {
+    const url = `https://desafiobackend-angelica.herokuapp.com/${userId}/investments`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setInvestments(data.filter((user) => user.userId === userId)[0]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  const getBankTransitions = () => {
-    axios.get('/data/bankTransitions.json')
-      .then((response) => {
-        setBankTransitions(response.data.filter((user) => user.userId === userId)[0]);
-      });
+  const getBankTransitions = async () => {
+    const url = `https://desafiobackend-angelica.herokuapp.com/${userId}/bankTransitions`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setBankTransitions(data.filter((user) => user.userId === userId)[0]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const generateGlobalState = () => {
@@ -36,9 +50,11 @@ function FinanceProvider({ children }) {
   };
 
   useEffect(() => {
-    getInvestments();
-    getBankTransitions();
-    setIsFetching(false);
+    if (userId) {
+      getInvestments();
+      getBankTransitions();
+      setIsFetching(false);
+    }
   }, [userId]);
 
   const { Provider } = FinanceContext;
@@ -51,6 +67,7 @@ function FinanceProvider({ children }) {
         setUserEmail,
         generateGlobalState,
         isFetching,
+        userName,
       }}
     >
       {children}
