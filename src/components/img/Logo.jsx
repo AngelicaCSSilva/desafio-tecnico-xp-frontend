@@ -4,7 +4,7 @@ import { StyledLogo } from './styles/Logo.style';
 
 export default function Logo({ width }) {
   return (
-    <StyledLogo src="/logo-xpi.svg" width={width} alt="Logo da XP Investimentos" />
+    <StyledLogo src="/img/logo-xpi.svg" width={width} alt="Logo da XP Investimentos" />
   );
 }
 

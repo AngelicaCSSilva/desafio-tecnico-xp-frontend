@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
+// import './App.css';
 import Bank from './components/pages/Bank';
 import Login from './components/pages/Login';
 import Stocks from './components/pages/Stocks';
@@ -11,7 +11,7 @@ function App() {
     <div className="App">
       <FinanceProvider>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route exact path="/" element={<Login />} />
           <Route path="/stocks" element={<Stocks />} />
           <Route path="/bank" element={<Bank />} />
         </Routes>
