@@ -50,9 +50,11 @@ function FinanceProvider({ children }) {
   };
 
   useEffect(() => {
-    getInvestments();
-    getBankTransitions();
-    setIsFetching(false);
+    if (userId) {
+      getInvestments();
+      getBankTransitions();
+      setIsFetching(false);
+    }
   }, [userId]);
 
   const { Provider } = FinanceContext;
