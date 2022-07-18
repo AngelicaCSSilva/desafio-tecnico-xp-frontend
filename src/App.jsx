@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 // import './App.css';
 import Bank from './components/pages/Bank';
 import Login from './components/pages/Login';
@@ -10,11 +10,11 @@ function App() {
   return (
     <div className="App">
       <FinanceProvider>
-        <Routes>
-          <Route exact path="/" element={<Login />} />
-          <Route path="/stocks" element={<Stocks />} />
-          <Route path="/bank" element={<Bank />} />
-        </Routes>
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route path="/stocks" component={ Stocks } />
+          <Route path="/bank" component={ Bank } />
+        </Switch>
       </FinanceProvider>
     </div>
   );
