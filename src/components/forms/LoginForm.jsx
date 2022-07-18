@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import FinanceContext from '../../context/FinanceContext';
 import { getLocalStorage, saveLocalStorage } from '../../utils/localStorage';
 import { CenteredForm } from './styles/CenteredForm';
@@ -7,7 +7,7 @@ import { StyledLabel } from './styles/StyledLabel';
 
 export default function LoginForm() {
   const { setUserEmail } = useContext(FinanceContext);
-  const navigate = useNavigate();
+  const history = useHistory();
 
   const [user, setUser] = useState({
     email: getLocalStorage('lastUser')?.email || '',
@@ -24,7 +24,7 @@ export default function LoginForm() {
   const handleClickButton = () => {
     saveLocalStorage('lastUser', { email: user.email, lastLogin: new Date() });
     setUserEmail(user.email);
-    navigate('/stocks', { replace: true });
+    history.push('/stocks');
   };
 
   return (
