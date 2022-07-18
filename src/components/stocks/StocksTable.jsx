@@ -3,7 +3,7 @@ import React from 'react';
 
 import useFetch from '../../hooks/useFetch';
 import Loader from '../loader/Loader';
-import { TableHead } from './styles/TableHead.style';
+import StocksTableHead from './StocksTableHead';
 
 export default function StocksTable({ stocks, isOnlyBuyOp, userInvestments }) {
   const stocksString = stocks.join('%2C');
@@ -26,14 +26,7 @@ export default function StocksTable({ stocks, isOnlyBuyOp, userInvestments }) {
         ? <Loader />
         : (
           <table>
-            <thead>
-              <tr>
-                <TableHead>Ação</TableHead>
-                <TableHead>Qtde.</TableHead>
-                <TableHead>Valor (R$)</TableHead>
-                <TableHead>Operação</TableHead>
-              </tr>
-            </thead>
+            <StocksTableHead />
             <tbody>
               { data?.results?.map((ticket) => (
                 <tr key={ticket.symbol}>
