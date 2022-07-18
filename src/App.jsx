@@ -9,15 +9,13 @@ import FinanceProvider from './context/FinanceProvider';
 
 function App() {
   return (
-    <div className="App">
-      <FinanceProvider>
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <Route path="/stocks" component={Stocks} />
-          <Route path="/bank" component={Bank} />
-        </Switch>
-      </FinanceProvider>
-    </div>
+    <FinanceProvider>
+      <Switch>
+        <Route exact path="/" component={Login} />
+        <Route path="/stocks" component={Stocks} />
+        <Route path="/bank" component={Bank} />
+      </Switch>
+    </FinanceProvider>
   );
 }
 
