@@ -6,7 +6,9 @@ import FinanceContext from './FinanceContext';
 function FinanceProvider({ children }) {
   const [bankTransitions, setBankTransitions] = useState(null);
   const [investments, setInvestments] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
   const [userName, setuserName] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
 
   const getUserId = async () => {
