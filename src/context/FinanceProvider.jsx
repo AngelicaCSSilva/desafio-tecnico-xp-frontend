@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react';
 import FinanceContext from './FinanceContext';
 
 function FinanceProvider({ children }) {
-  const [bankTransitions, setBankTransitions] = useState(null);
-  const [investments, setInvestments] = useState(null);
+  const [bankTransactions, setBankTransactions] = useState(null);
+  const [assets, setAssets] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
   const [userName, setuserName] = useState(null);
   const [userId, setUserId] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
+
+  const [isModalOn, setIsModalOn] = useState(false);
 
   const getUserId = async () => {
     const url = 'https://desafiobackend-angelica.herokuapp.com/users';
@@ -24,22 +26,22 @@ function FinanceProvider({ children }) {
   };
 
   const getInvestments = async () => {
-    const url = `https://desafiobackend-angelica.herokuapp.com/${userId}/investments`;
+    const url = `https://desafiobackend-angelica.herokuapp.com/${userId}/assets`;
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setInvestments(data.filter((user) => user.userId === userId)[0]);
+      setAssets(data.filter((user) => user.userId === userId)[0]);
     } catch (error) {
       console.log(error);
     }
   };
 
   const getBankTransitions = async () => {
-    const url = `https://desafiobackend-angelica.herokuapp.com/${userId}/bankTransitions`;
+    const url = `https://desafiobackend-angelica.herokuapp.com/${userId}/bankTransactions`;
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setBankTransitions(data.filter((user) => user.userId === userId)[0]);
+      setBankTransactions(data.filter((user) => user.userId === userId)[0]);
     } catch (error) {
       console.log(error);
     }
@@ -61,13 +63,16 @@ function FinanceProvider({ children }) {
   return (
     <Provider
       value={{
-        bankTransitions,
-        investments,
+        bankTransactions,
+        assets,
         userEmail,
         setUserEmail,
         generateGlobalState,
         isFetching,
         userName,
+        isModalOn,
+        setIsModalOn,
+        setAssets,
       }}
     >
       {children}
