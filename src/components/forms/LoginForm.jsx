@@ -25,7 +25,7 @@ export default function LoginForm() {
   const handleClickButton = () => {
     saveLocalStorage('lastUser', { email: user.email, lastLogin: new Date() });
     setUserEmail(user.email);
-    history.push('/stocks');
+    history.push('/assets');
   };
 
   return (

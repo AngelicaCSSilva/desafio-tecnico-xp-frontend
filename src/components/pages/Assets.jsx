@@ -5,9 +5,9 @@ import Footer from '../footer/Footer';
 import Loader from '../loader/Loader';
 import StocksTable from '../stocks/StocksTable';
 
-export default function Stocks() {
+export default function Assets() {
   const {
-    investments,
+    assets,
     generateGlobalState,
     userName,
   } = useContext(FinanceContext);
@@ -16,10 +16,10 @@ export default function Stocks() {
     generateGlobalState();
   }, []);
 
-  const userStocks = investments?.stocks?.map((stock) => stock.ticket);
-  const userInvestments = investments?.stocks;
+  const userStocks = assets?.stocks?.map((stock) => stock.ticket);
+  const userInvestments = assets?.stocks;
 
-  const watchlistExclusives = investments?.watchlist.filter((stock) => !userStocks.includes(stock));
+  const watchlistExclusives = assets?.watchlist.filter((stock) => !userStocks.includes(stock));
 
   return (
     <div>
