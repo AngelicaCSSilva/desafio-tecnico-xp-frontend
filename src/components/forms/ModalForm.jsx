@@ -77,16 +77,18 @@ export default function ModalForm() {
   const handleTransaction = () => {
     const isDeposit = (operationType === 'Depósito');
     const formatedValue = isDeposit ? modalValue : -Math.abs(modalValue);
-    setBankTransactions(
-      bankTransactions?.transactions?.unshift(
-        {
-          data: new Date(),
-          description: operationType,
-          value: formatedValue,
-        },
-      ),
-    );
-    setIsModalOn(false);
+    const newTransaction = {
+      date: new Date(),
+      description: operationType,
+      total: formatedValue,
+    };
+    setBankTransactions({
+      ...bankTransactions,
+      transaction: [
+        newTransaction,
+        ...bankTransactions.transaction,
+      ],
+    });
   };
 
   const getBalance = () => bankTransactions?.transaction?.reduce((acc, obj) => acc + obj.total, 0);
