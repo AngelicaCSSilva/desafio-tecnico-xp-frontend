@@ -11,12 +11,13 @@ export default function Assets() {
     assets,
     generateGlobalState,
     userName,
+    userId,
     isModalOn,
   } = useContext(FinanceContext);
 
   useEffect(() => {
     generateGlobalState();
-  }, []);
+  }, [userId]);
 
   const userStocks = assets?.stocks?.map((stock) => stock.ticket);
   const userInvestments = assets?.stocks;
