@@ -9,7 +9,7 @@ export default function useFetch(url) {
       .then((res) => res.json())
       .then((result) => setData(result))
       .finally(setIsFetching(false))
-      .catch((err) => console.log(err));
+      .catch((error) => { throw new Error(error); });
   }, []);
 
   return { data, isFetching };
