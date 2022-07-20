@@ -1,15 +1,17 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 
+import FinanceContext from '../../context/FinanceContext';
 import OperationButton from '../button/OperationButton';
 import Loader from '../loader/Loader';
 import StocksTableHead from './StocksTableHead';
 
+  const { assets } = useContext(FinanceContext);
   const [data, setData] = useState(null);
   const [isFetchingData, setIsFetchingData] = useState(true);
 
   const isFII = (shortname) => shortname.includes('FII');
-
+  const userInvestments = assets?.stocks;
   const defineQuantity = (ticket) => (isFII(ticket.shortName) ? 1 : 100);
 
   const getOrdersSum = (ticketName) => {
