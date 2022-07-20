@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import useFetch from '../../hooks/useFetch';
+import OperationButton from '../button/OperationButton';
 import Loader from '../loader/Loader';
 import StocksTableHead from './StocksTableHead';
 
@@ -35,11 +35,14 @@ export default function StocksTable({ stocks, isOnlyBuyOp, userInvestments }) {
                     ? (<td>{ defineQuantity(ticket) }</td>)
                     : (<td>{ getOrdersSum(ticket.symbol) }</td>)}
                   <td>{ ticket.regularMarketPrice }</td>
-                  { isOnlyBuyOp ? <td><button type="button">Comprar</button></td> : (
+                  { isOnlyBuyOp ? (
                     <td>
-                      <button type="button">Vender</button>
-                      {' '}
-                      <button type="button">Comprar</button>
+                      <OperationButton operationType="Compra" isOrder ticket={ticket.symbol} />
+                    </td>
+                  ) : (
+                    <td>
+                      <OperationButton operationType="Compra" isOrder ticket={ticket.symbol} />
+                      <OperationButton operationType="Venda" isOrder ticket={ticket.symbol} />
                     </td>
                   )}
                 </tr>
