@@ -26,6 +26,7 @@ export default function ModalForm() {
 
   const isSell = (operationType === 'Venda');
 
+  const getBalance = () => bankTransactions?.transaction?.reduce((acc, obj) => acc + obj.total, 0);
 
   const handleConfirmButton = () => {
     if (isOrder) { handleOrder(); } else { handleTransaction(); }
@@ -39,6 +40,14 @@ export default function ModalForm() {
     setQtdValue(0);
     setIsModalOn(false);
   };
+
+  useEffect(() => {
+    if (assets && bankTransactions) {
+      const balance = getBalance();
+      setMaxQtd(parseInt(balance / modalValue, 10));
+      setMaxValue(isOrder ? parseInt(balance / qtdValue, 10) : (modalValue + 1));
+    }
+  }, [assets, bankTransactions]);
 
   return (
     <ModalContentForm>
