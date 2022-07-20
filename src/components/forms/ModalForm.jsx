@@ -46,6 +46,17 @@ export default function ModalForm() {
     }
   };
 
+  const handleSellOrder = (ticketStock, stocksLessTicket, newOrder) => {
+    if (getOrdersSum() === 1) {
+      setAssets({ ...assets, stocks: [...stocksLessTicket] });
+    } else {
+      const selectedStock = ticketStock()[0];
+      selectedStock.orders.push(newOrder);
+
+      setAssets({ ...assets, stocks: [...stocksLessTicket, selectedStock] });
+    }
+  };
+
   const handleOrder = () => {
     const formatedQtd = isSell ? -Math.abs(qtdValue) : qtdValue;
     const formatedValue = isSell ? -Math.abs(modalValue) : modalValue;
