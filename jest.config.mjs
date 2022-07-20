@@ -6,8 +6,19 @@
 export default {
   clearMocks: true,
   collectCoverage: true,
-  coverageDirectory: "coverage",
-  coverageProvider: "v8",
-  testEnvironment: "jsdom",
+  coverageDirectory: 'coverage',
+  coverageProvider: 'v8',
+  testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/.github/', '/.vscode/', '/public/'],
+  coveragePathIgnorePatterns: [
+    'node_modules',
+    'test-config',
+    'interfaces',
+    'jestGlobalMocks.ts',
+    '.module.ts',
+    '<rootDir>/src/app/main.ts',
+    '.mock.ts',
+    '/tests/',
+    '/tests/mocks/',
+  ],
 };
