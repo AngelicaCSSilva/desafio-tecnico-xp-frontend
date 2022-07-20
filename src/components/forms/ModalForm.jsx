@@ -26,6 +26,22 @@ export default function ModalForm() {
 
   const isSell = (operationType === 'Venda');
 
+  const handleOrder = () => {
+    const formatedQtd = isSell ? -Math.abs(qtdValue) : qtdValue;
+    const formatedValue = isSell ? -Math.abs(modalValue) : modalValue;
+
+    const date = new Date();
+    const newOrder = { data: date.toISOString(), qtd: formatedQtd, value: formatedValue };
+
+    const ticketStock = () => assets?.stocks?.filter((stock) => stock.ticket === selectedTicket);
+    const stocksLessTicket = assets.stocks.filter((stock) => stock.ticket !== selectedTicket);
+
+    if (isSell) {
+      handleSellOrder(ticketStock, stocksLessTicket, newOrder);
+    } else {
+      handleBuyOrder(ticketStock, stocksLessTicket, newOrder);
+    }
+  };
   const getBalance = () => bankTransactions?.transaction?.reduce((acc, obj) => acc + obj.total, 0);
 
   const handleConfirmButton = () => {
