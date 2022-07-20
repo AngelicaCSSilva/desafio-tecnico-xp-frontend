@@ -16,8 +16,9 @@ export default function StocksTable({ stocks, isOnlyBuyOp }) {
   const defineQuantity = (ticket) => (isFII(ticket.shortName) ? 1 : 100);
 
   const getOrdersSum = (ticketName) => {
-    const { orders } = userInvestments.find(({ ticket }) => ticket === ticketName);
-    return orders.reduce((acc, obj) => acc + obj.qtd, 0);
+    const assset = userInvestments.find(({ ticket }) => ticket === ticketName);
+    if (!assset) return 0;
+    return assset.orders.reduce((acc, obj) => acc + obj.qtd, 0);
   };
 
   useEffect(() => {
@@ -46,7 +47,7 @@ export default function StocksTable({ stocks, isOnlyBuyOp }) {
           <table>
             <StocksTableHead />
             <tbody>
-              { data?.results?.map((ticket) => (
+              {data?.results?.map((ticket) => (
                 <tr key={ticket.symbol}>
                   <td>{ ticket.symbol }</td>
                   { isOnlyBuyOp
@@ -68,7 +69,6 @@ export default function StocksTable({ stocks, isOnlyBuyOp }) {
             </tbody>
           </table>
         )}
-
     </div>
   );
 }
