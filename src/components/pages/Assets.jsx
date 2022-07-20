@@ -30,7 +30,9 @@ export default function Assets() {
           <>
             <div><p>{`Olá, ${userName}`}</p></div>
             <h2>Minhas ações</h2>
-            <StocksTable stocks={assets?.stocks?.map((stock) => stock.ticket)} />
+            { assets?.stocks?.length >= 1
+              ? <StocksTable stocks={assets?.stocks?.map((stock) => stock.ticket)} />
+              : <p>Você não possui ações.</p>}
             <h2>Disponíveis para investir</h2>
             { watchlistExclusives.length >= 1
               ? <StocksTable stocks={watchlistExclusives} isOnlyBuyOp />
