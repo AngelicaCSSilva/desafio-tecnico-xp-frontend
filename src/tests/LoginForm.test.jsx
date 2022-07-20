@@ -1,33 +1,39 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
+import { screen, render } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import Login from '../components/pages/Login';
+import LoginForm from '../components/forms/LoginForm';
 
-describe('Login page test.', () => {
-  it('An input for email is displayed on the screen.', () => {
-    render(<Login />, { wrapper: BrowserRouter });
+describe('Login Form test.', () => {
+  it('Must have an email input.', () => {
+    render(<LoginForm />, { wrapper: BrowserRouter });
     const emailInput = screen.getByRole('textbox', { id: /email/i });
     expect(emailInput).toBeInTheDocument();
   });
 
-  it('An input for a password is displayed on the screen.', () => {
-    render(<Login />, { wrapper: BrowserRouter });
+  it('Must have an email input.', () => {
+    render(<LoginForm />, { wrapper: BrowserRouter });
     const passwordInput = screen.getByRole('textbox', { id: /password/i });
     expect(passwordInput).toBeInTheDocument();
   });
 
-  it('An login button appears on the screen.', () => {
-    render(<Login />, { wrapper: BrowserRouter });
+  it('Must have an password input.', () => {
+    render(<LoginForm />, { wrapper: BrowserRouter });
     const enterButton = screen.getByRole('button', { name: /Acessar/i });
     expect(enterButton).toBeInTheDocument();
   });
 
+  it('Must have an login button.', () => {
+    render(<LoginForm />, { wrapper: BrowserRouter });
+    const enterButton = screen.getByRole('button', { name: /Acessar/i });
+    expect(enterButton).toBeDisabled();
+  });
+
   it('Access button remains disabled '
-+ 'when entering invalid information.', async () => {
-    render(<Login />, { wrapper: BrowserRouter });
+  + 'when entering invalid information.', async () => {
+    render(<LoginForm />, { wrapper: BrowserRouter });
 
     const emailInput = screen.getByLabelText('Email:');
     await user.type(emailInput, 'aaa.co@m');
@@ -43,8 +49,8 @@ describe('Login page test.', () => {
   });
 
   it('The access button is activated '
-+ 'when valid information is entered.', async () => {
-    render(<Login />, { wrapper: BrowserRouter });
+  + 'when valid information is entered.', async () => {
+    render(<LoginForm />, { wrapper: BrowserRouter });
     const enterButton = screen.getByRole('button', { name: /Acessar/i });
     expect(enterButton).toBeDisabled();
 
