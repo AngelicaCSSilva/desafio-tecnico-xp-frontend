@@ -4,6 +4,6 @@ import { StyledLoader } from './styles/Loader.style';
 
 export default function Loader() {
   return (
-    <StyledLoader />
+    <StyledLoader data-testid="loader" />
   );
 }
