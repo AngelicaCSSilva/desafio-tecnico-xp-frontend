@@ -6,6 +6,7 @@ import OperationButton from '../button/OperationButton';
 import Loader from '../loader/Loader';
 import StocksTableHead from './StocksTableHead';
 
+export default function StocksTable({ stocks, isOnlyBuyOp }) {
   const { assets } = useContext(FinanceContext);
   const [data, setData] = useState(null);
   const [isFetchingData, setIsFetchingData] = useState(true);
@@ -74,20 +75,9 @@ import StocksTableHead from './StocksTableHead';
 
 StocksTable.defaultProps = {
   isOnlyBuyOp: false,
-  userInvestments: null,
 };
 
 StocksTable.propTypes = {
   stocks: PropTypes.arrayOf(PropTypes.string).isRequired,
   isOnlyBuyOp: PropTypes.bool,
-  userInvestments: PropTypes.arrayOf(
-    PropTypes.exact({
-      ticket: PropTypes.string,
-      orders: PropTypes.arrayOf(PropTypes.shape({
-        date: PropTypes.string.isRequired,
-        qtd: PropTypes.number.isRequired,
-        total: PropTypes.number.isRequired,
-      })),
-    }),
-  ),
 };
