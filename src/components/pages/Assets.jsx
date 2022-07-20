@@ -20,9 +20,7 @@ export default function Assets() {
   }, [userId]);
 
   const userStocks = assets?.stocks?.map((stock) => stock.ticket);
-  const userInvestments = assets?.stocks;
-
-  const watchlistExclusives = assets?.watchlist.filter((stock) => !userStocks.includes(stock));
+  const watchlistExclusives = assets?.watchlist?.filter((stock) => !userStocks.includes(stock));
 
   return (
     <div>
