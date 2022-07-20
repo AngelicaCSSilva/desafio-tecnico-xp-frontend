@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import FinanceContext from '../../context/FinanceContext';
 import Footer from '../footer/Footer';
 import Loader from '../loader/Loader';
+import Modal from '../modal/Modal';
 import StocksTable from '../stocks/StocksTable';
 
 export default function Assets() {
