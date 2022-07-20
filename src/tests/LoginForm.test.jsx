@@ -7,32 +7,32 @@ import { BrowserRouter } from 'react-router-dom';
 import LoginForm from '../components/forms/LoginForm';
 
 describe('Login Form test.', () => {
-  it('Must have an email input.', async () => {
+  it('Must have an email input.', () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
     const emailInput = screen.getByRole('textbox', { id: /email/i });
     expect(emailInput).toBeInTheDocument();
   });
 
-  it('Must have an email input.', async () => {
+  it('Must have an email input.', () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
     const passwordInput = screen.getByRole('textbox', { id: /password/i });
     expect(passwordInput).toBeInTheDocument();
   });
 
-  it('Must have an password input.', async () => {
+  it('Must have an password input.', () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
     const enterButton = screen.getByRole('button', { name: /Acessar/i });
     expect(enterButton).toBeInTheDocument();
   });
 
-  it('Must have an login button.', async () => {
+  it('Must have an login button.', () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
     const enterButton = screen.getByRole('button', { name: /Acessar/i });
     expect(enterButton).toBeDisabled();
   });
 
   it('Access button remains disabled '
-  + 'when entering invalid information.', async () => {
+  + 'when entering invalid information.', () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
 
     const emailInput = screen.getByLabelText('Email:');
@@ -49,7 +49,7 @@ describe('Login Form test.', () => {
   });
 
   it('The access button is activated '
-  + 'when valid information is entered.', async () => {
+  + 'when valid information is entered.', () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
     const enterButton = screen.getByRole('button', { name: /Acessar/i });
     expect(enterButton).toBeDisabled();

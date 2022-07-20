@@ -5,7 +5,7 @@ import React from 'react';
 import Loader from '../components/loader/Loader';
 
 describe('Loader test.', () => {
-  it('If Loader renders.', async () => {
+  it('If Loader renders.', () => {
     render(<Loader />);
     const loader = screen.getByTestId('loader');
     expect(loader).toBeInTheDocument();
