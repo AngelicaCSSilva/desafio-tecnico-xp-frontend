@@ -26,6 +26,11 @@ export default function ModalForm() {
 
   const isSell = (operationType === 'Venda');
 
+  const getOrdersSum = () => {
+    const { orders } = assets.stocks.find(({ ticket }) => ticket === selectedTicket);
+    return orders.reduce((acc, obj) => acc + obj.qtd, 0);
+  };
+
   const handleBuyOrder = (ticketStock, stocksLessTicket, newOrder) => {
     if (ticketStock().length < 1) {
       const newStock = {
