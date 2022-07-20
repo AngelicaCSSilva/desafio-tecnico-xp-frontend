@@ -12,6 +12,9 @@ function FinanceProvider({ children }) {
   const [isFetching, setIsFetching] = useState(true);
 
   const [isModalOn, setIsModalOn] = useState(false);
+  const [isOrder, setIsOrder] = useState(true);
+  const [operationType, setOperationType] = useState('Compra');
+  const [selectedTicket, setSelectedTicket] = useState(null);
 
   const getUserId = async () => {
     const url = 'https://desafiobackend-angelica.herokuapp.com/users';
@@ -73,6 +76,13 @@ function FinanceProvider({ children }) {
         isModalOn,
         setIsModalOn,
         setAssets,
+        isOrder,
+        setIsOrder,
+        operationType,
+        setOperationType,
+        selectedTicket,
+        setSelectedTicket,
+        setBankTransactions,
       }}
     >
       {children}
