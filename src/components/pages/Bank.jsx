@@ -33,7 +33,9 @@ export default function Bank() {
               <OperationButton operationType="Depósito" />
             </StyledButtonsDiv>
             <h2>Extrato bancário</h2>
-            <StatementTable transactions={transactions} />
+            { transactions
+              ? (<StatementTable transactions={transactions} />)
+              : (<p>Não há movimentações bancárias.</p>)}
             {isModalOn && <Modal />}
           </main>
         )}
