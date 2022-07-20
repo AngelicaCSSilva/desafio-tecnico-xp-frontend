@@ -32,7 +32,7 @@ describe('Login Form test.', () => {
   });
 
   it('Access button remains disabled '
-  + 'when entering invalid information.', () => {
+  + 'when entering invalid information.', async () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
 
     const emailInput = screen.getByLabelText('Email:');
@@ -49,7 +49,7 @@ describe('Login Form test.', () => {
   });
 
   it('The access button is activated '
-  + 'when valid information is entered.', () => {
+  + 'when valid information is entered.', async () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
     const enterButton = screen.getByRole('button', { name: /Acessar/i });
     expect(enterButton).toBeDisabled();
