@@ -1,15 +1,12 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import OperationButton from '../button/OperationButton';
 import Loader from '../loader/Loader';
 import StocksTableHead from './StocksTableHead';
 
-export default function StocksTable({ stocks, isOnlyBuyOp, userInvestments }) {
-  const stocksString = stocks.join('%2C');
-
-  const url = `https://brapi.dev/api/quote/${stocksString}`;
-  const { data, isFetching } = useFetch(url);
+  const [data, setData] = useState(null);
+  const [isFetchingData, setIsFetchingData] = useState(true);
 
   const isFII = (shortname) => shortname.includes('FII');
 
@@ -20,9 +17,27 @@ export default function StocksTable({ stocks, isOnlyBuyOp, userInvestments }) {
     return orders.reduce((acc, obj) => acc + obj.qtd, 0);
   };
 
+  useEffect(() => {
+    async function fetchData(url) {
+      try {
+        const response = await fetch(url);
+        const fetchResult = await response.json();
+        setData(fetchResult);
+      } catch (error) {
+        throw new Error(error);
+      }
+      setIsFetchingData(false);
+    }
+    setIsFetchingData(true);
+    const stocksString = stocks?.join('%2C');
+    const url = `https://brapi.dev/api/quote/${stocksString}`;
+    fetchData(url);
+    setIsFetchingData(false);
+  }, [assets]);
+
   return (
     <div>
-      { isFetching
+      { isFetchingData
         ? <Loader />
         : (
           <table>
