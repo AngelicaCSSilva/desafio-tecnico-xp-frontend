@@ -73,6 +73,22 @@ export default function ModalForm() {
       handleBuyOrder(ticketStock, stocksLessTicket, newOrder);
     }
   };
+
+  const handleTransaction = () => {
+    const isDeposit = (operationType === 'Depósito');
+    const formatedValue = isDeposit ? modalValue : -Math.abs(modalValue);
+    setBankTransactions(
+      bankTransactions?.transactions?.unshift(
+        {
+          data: new Date(),
+          description: operationType,
+          value: formatedValue,
+        },
+      ),
+    );
+    setIsModalOn(false);
+  };
+
   const getBalance = () => bankTransactions?.transaction?.reduce((acc, obj) => acc + obj.total, 0);
 
   const handleConfirmButton = () => {
