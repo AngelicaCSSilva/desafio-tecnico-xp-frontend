@@ -10,6 +10,7 @@ export default function Assets() {
     assets,
     generateGlobalState,
     userName,
+    isModalOn,
   } = useContext(FinanceContext);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export default function Assets() {
             <h2>Minhas ações</h2>
             <StocksTable stocks={userStocks} userInvestments={userInvestments} />
             <h2>Disponíveis para investir</h2>
-            <StocksTable stocks={watchlistExclusives} isOnlyBuyOp />
+            {isModalOn && <Modal />}
             <Footer />
           </>
         )}
