@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 
 import FinanceContext from '../../context/FinanceContext';
+import { StyledButtonsDiv } from '../button/StyledButtonsDiv';
 import { ModalContentForm } from './styles/ModalContentForm';
 import { StyledLabel } from './styles/StyledLabel';
 
@@ -68,6 +69,7 @@ export default function ModalForm() {
           onChange={({ target: { value } }) => setModalValue(value)}
         />
       </StyledLabel>
+      <StyledButtonsDiv>
         <button
           type="button"
           onClick={handleCancelButton}
@@ -80,6 +82,7 @@ export default function ModalForm() {
         >
           Confirmar
         </button>
+      </StyledButtonsDiv>
     </ModalContentForm>
   );
 }
