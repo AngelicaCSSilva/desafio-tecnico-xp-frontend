@@ -24,7 +24,7 @@ function FinanceProvider({ children }) {
       setUserId(data.filter((user) => user.email === userEmail)[0].userId);
       setuserName(data.filter((user) => user.email === userEmail)[0].name);
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 
@@ -35,7 +35,7 @@ function FinanceProvider({ children }) {
       const data = await response.json();
       setAssets(data.filter((user) => user.userId === userId)[0]);
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 
@@ -46,7 +46,7 @@ function FinanceProvider({ children }) {
       const data = await response.json();
       setBankTransactions(data.filter((user) => user.userId === userId)[0]);
     } catch (error) {
-      console.log(error);
+      throw new Error(error);
     }
   };
 
