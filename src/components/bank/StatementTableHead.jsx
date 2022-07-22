@@ -8,7 +8,7 @@ export default function StatementTableHead() {
       <tr>
         <TableHead>Data</TableHead>
         <TableHead>Descrição</TableHead>
-        <TableHead>Valor (R$)</TableHead>
+        <TableHead>Valor</TableHead>
       </tr>
     </thead>
   );
