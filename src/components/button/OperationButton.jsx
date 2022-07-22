@@ -2,8 +2,11 @@ import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 
 import FinanceContext from '../../context/FinanceContext';
+import { StyledOperationButton } from './styles/StyledOperationButton.style';
 
-export default function OperationButton({ operationType, isOrder, ticket }) {
+export default function OperationButton({
+  operationType, isOrder, ticket, isPrimary,
+}) {
   const {
     setIsOrder,
     setOperationType,
@@ -19,20 +22,21 @@ export default function OperationButton({ operationType, isOrder, ticket }) {
   };
 
   return (
-
-    <button type="button" onClick={handleClick}>
+    <StyledOperationButton type="button" isPrimary={isPrimary} onClick={handleClick}>
       {operationType}
-    </button>
+    </StyledOperationButton>
   );
 }
 
 OperationButton.defaultProps = {
   isOrder: false,
   ticket: null,
+  isPrimary: false,
 };
 
 OperationButton.propTypes = {
   operationType: PropTypes.string.isRequired,
   isOrder: PropTypes.bool,
   ticket: PropTypes.string,
+  isPrimary: PropTypes.bool,
 };
