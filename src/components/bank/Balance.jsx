@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
 import Loader from '../loader/Loader';
+import { StyledBalance } from './styles/StyledBalance.style';
+import { StyledNumber } from './styles/StyledNumber.style';
 
 export default function Balance({ transactions }) {
   const [transactionsInfo, setTransactionsInfo] = useState(null);
@@ -14,16 +16,16 @@ export default function Balance({ transactions }) {
   }, [transactions]);
 
   return (
-    <div>
-      { isGettingData
-        ? <Loader />
-        : (
+    isGettingData
+      ? <StyledBalance><Loader /></StyledBalance>
+      : (
+        <StyledBalance>
           <p>
-            SALDO (R$)
-            <span>{getBalance()}</span>
+            SALDO:
           </p>
-        ) }
-    </div>
+          <StyledNumber>{new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(getBalance())}</StyledNumber>
+        </StyledBalance>
+      )
   );
 }
 
