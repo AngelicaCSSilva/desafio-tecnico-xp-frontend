@@ -4,9 +4,10 @@ export const StyledButtonsDiv = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   align-content: center;
+  width: 400px;
 `;
 
 export default { StyledButtonsDiv };
