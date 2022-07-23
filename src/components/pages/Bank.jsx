@@ -18,6 +18,8 @@ export default function Bank() {
   const [transactions, setTransactions] = useState(null);
   const [isGettingData, setIsGettingData] = useState(true);
 
+  const getBalance = () => bankTransactions?.transaction?.reduce((acc, obj) => acc + obj.total, 0);
+
   useEffect(() => {
     setIsGettingData(true);
     setTransactions(bankTransactions?.transaction);
@@ -34,7 +36,7 @@ export default function Bank() {
             <HeadingOne>Conta Digital</HeadingOne>
             <Balance transactions={transactions} />
             <StyledButtonsDiv>
-              <OperationButton operationType="Retirada" />
+              {getBalance() <= 0 ? <OperationButton isDisabled operationType="Retirada" /> : <OperationButton operationType="Retirada" />}
               <OperationButton isPrimary operationType="Depósito" />
             </StyledButtonsDiv>
             <HeadingTwo>Extrato bancário</HeadingTwo>
