@@ -1,7 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 
 import FinanceContext from '../../context/FinanceContext';
+import { CenteredFlex } from '../divs/CenteredFlex';
 import Footer from '../footer/Footer';
+import Header from '../header/Header';
+import { HeadingOne } from '../heading/HeadingOne.style';
+import { HeadingTwo } from '../heading/HeadingTwo.style';
 import Loader from '../loader/Loader';
 import Modal from '../modal/Modal';
 import StocksTable from '../stocks/StocksTable';
@@ -10,7 +14,6 @@ export default function Assets() {
   const {
     assets,
     generateGlobalState,
-    userName,
     userId,
     isModalOn,
   } = useContext(FinanceContext);
@@ -23,24 +26,25 @@ export default function Assets() {
   const watchlistExclusives = assets?.watchlist?.filter((stock) => !userStocks.includes(stock));
 
   return (
-    <div>
-      { !userStocks
-        ? <Loader />
-        : (
-          <>
-            <div><p>{`Olá, ${userName}`}</p></div>
-            <h2>Minhas ações</h2>
+    !userStocks
+      ? <CenteredFlex><Loader /></CenteredFlex>
+      : (
+        <CenteredFlex>
+          <Header />
+          <main>
+            <HeadingOne>Investimentos</HeadingOne>
+            <HeadingTwo>Minhas ações</HeadingTwo>
             { assets?.stocks?.length >= 1
               ? <StocksTable stocks={assets?.stocks?.map((stock) => stock.ticket)} />
               : <p>Você não possui ações.</p>}
-            <h2>Disponíveis para investir</h2>
+            <HeadingTwo>Disponíveis para investir</HeadingTwo>
             { watchlistExclusives.length >= 1
               ? <StocksTable stocks={watchlistExclusives} isOnlyBuyOp />
               : <p>Não há novas ações disponíveis.</p>}
             {isModalOn && <Modal />}
-            <Footer />
-          </>
-        )}
-    </div>
+          </main>
+          <Footer />
+        </CenteredFlex>
+      )
   );
 }
