@@ -68,6 +68,9 @@ function FinanceProvider({ children }) {
   };
 
   useEffect(() => {
+    if (!userId && userEmail) {
+      getUserId();
+    }
     if (userId) {
       getInvestments();
       getAllStocks();
