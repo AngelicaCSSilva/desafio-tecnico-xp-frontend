@@ -32,13 +32,14 @@ export default function LoginForm() {
   };
 
   return (
-    <CenteredForm>
+    <CenteredForm onSubmit={handleSubmit}>
       <StyledLabel htmlFor="email">
         Email:
         <StyledInput
           id="email"
           type="text"
           value={user.email}
+          required
           name="email"
           onChange={
               ({ target: { value, name } }) => setUser({ ...user, [name]: value })
@@ -52,6 +53,7 @@ export default function LoginForm() {
           type="password"
           value={user.password}
           name="password"
+          required
           onChange={
               ({ target: { value, name } }) => setUser({ ...user, [name]: value })
             }
@@ -59,9 +61,8 @@ export default function LoginForm() {
       </StyledLabel>
       {error && <ErrorMessage error={error} />}
       <StyledLoginButton
-        type="button"
+        type="submit"
         disabled={validateForm()}
-        onClick={handleClickButton}
       >
         ACESSAR
       </StyledLoginButton>
