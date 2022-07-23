@@ -7,7 +7,7 @@ export const StyledButtonsDiv = styled.div`
   justify-content: space-around;
   align-items: center;
   align-content: center;
-  width: 400px;
+  width: 100vw;
 `;
 
 export default { StyledButtonsDiv };
