@@ -3,8 +3,9 @@ import { useHistory } from 'react-router-dom';
 
 import FinanceContext from '../../context/FinanceContext';
 import { getLocalStorage, saveLocalStorage } from '../../utils/localStorage';
-import { CenteredForm } from './styles/CenteredForm';
-import { StyledLabel } from './styles/StyledLabel';
+import { CenteredForm } from './styles/CenteredForm.style';
+import { StyledInput } from './styles/StyledInput.style';
+import { StyledLabel } from './styles/StyledLabel.style';
 
 export default function LoginForm() {
   const { setUserEmail } = useContext(FinanceContext);
@@ -32,7 +33,7 @@ export default function LoginForm() {
     <CenteredForm>
       <StyledLabel htmlFor="email">
         Email:
-        <input
+        <StyledInput
           id="email"
           type="text"
           value={user.email}
@@ -44,7 +45,7 @@ export default function LoginForm() {
       </StyledLabel>
       <StyledLabel htmlFor="password">
         Senha:
-        <input
+        <StyledInput
           id="password"
           type="password"
           value={user.password}
