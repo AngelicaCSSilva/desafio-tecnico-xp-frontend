@@ -13,7 +13,11 @@ cursor: pointer;
 transition: border-color 0.25s;
 &:hover {
   border-color: #ffc709;
-  background-color: rgba(255, 199, 9, 0.8)
+  background-color: rgba(255, 199, 9, 0.8);
+}
+&:disabled {
+  background-color: #696969;
+  color: #999;
 }`;
 
 export default { StyledOperationButton };
