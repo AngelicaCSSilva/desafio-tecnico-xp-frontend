@@ -3,13 +3,17 @@ import { useHistory } from 'react-router-dom';
 
 import FinanceContext from '../../context/FinanceContext';
 import { getLocalStorage, saveLocalStorage } from '../../utils/localStorage';
+import { saveSessionStorage } from '../../utils/sessionStorage';
 import { StyledLoginButton } from '../button/styles/StyledLoginButton.style';
+import ErrorMessage from '../error/ErrorMessage';
 import { CenteredForm } from './styles/CenteredForm.style';
 import { StyledInput } from './styles/StyledInput.style';
 import { StyledLabel } from './styles/StyledLabel.style';
 
 export default function LoginForm() {
-  const { setUserEmail } = useContext(FinanceContext);
+  const { setUserEmail, setToken } = useContext(FinanceContext);
+  const [error, setError] = useState(null);
+
   const history = useHistory();
 
   const [user, setUser] = useState({
@@ -24,20 +28,43 @@ export default function LoginForm() {
       && (user.password.length > passwordMinLength));
   };
 
-  const handleClickButton = () => {
-    saveLocalStorage('lastUser', { email: user.email, lastLogin: new Date() });
-    setUserEmail(user.email);
-    history.push('/assets');
+  const submitLogin = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: JSON.stringify(
+        `grant_type=&username=${user.email}&password=${user.password}&scope=&client_id=&client_secret=`,
+      ),
+    };
+
+    const response = await fetch('https://desafiobackend-angelica.herokuapp.com/token', requestOptions);
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.detail);
+    } else {
+      setToken(data.access_token);
+      saveLocalStorage('lastUser', { email: user.email, lastLogin: new Date().toISOString() });
+      saveSessionStorage('token', data.access_token);
+      setUserEmail(user.email);
+      history.push('/assets');
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitLogin();
   };
 
   return (
-    <CenteredForm>
+    <CenteredForm onSubmit={handleSubmit}>
       <StyledLabel htmlFor="email">
         Email:
         <StyledInput
           id="email"
           type="text"
           value={user.email}
+          required
           name="email"
           onChange={
               ({ target: { value, name } }) => setUser({ ...user, [name]: value })
@@ -51,15 +78,16 @@ export default function LoginForm() {
           type="password"
           value={user.password}
           name="password"
+          required
           onChange={
               ({ target: { value, name } }) => setUser({ ...user, [name]: value })
             }
         />
       </StyledLabel>
+      {error && <ErrorMessage error={error} />}
       <StyledLoginButton
-        type="button"
+        type="submit"
         disabled={validateForm()}
-        onClick={handleClickButton}
       >
         ACESSAR
       </StyledLoginButton>

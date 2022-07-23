@@ -1,6 +1,9 @@
 import React, { useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import FinanceContext from '../../context/FinanceContext';
+import { getLocalStorage } from '../../utils/localStorage';
+import { getSessionStorage } from '../../utils/sessionStorage';
 import { CenteredFlex } from '../divs/CenteredFlex';
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
@@ -16,10 +19,19 @@ export default function Assets() {
     generateGlobalState,
     userId,
     isModalOn,
+    setToken,
+    setUserEmail,
   } = useContext(FinanceContext);
 
+  const history = useHistory();
+
   useEffect(() => {
-    generateGlobalState();
+    const savedToken = getSessionStorage('token');
+    if (!savedToken) { history.push('/'); } else {
+      setToken(savedToken);
+      setUserEmail(getLocalStorage('lastUser')?.email);
+      generateGlobalState();
+    }
   }, [userId]);
 
   const userStocks = assets?.stocks?.map((stock) => stock.ticket);

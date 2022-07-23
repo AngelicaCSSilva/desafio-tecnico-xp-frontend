@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import FinanceContext from '../../context/FinanceContext';
 import Balance from '../bank/Balance';
@@ -14,13 +15,19 @@ import Loader from '../loader/Loader';
 import Modal from '../modal/Modal';
 
 export default function Bank() {
-  const { bankTransactions, isModalOn } = useContext(FinanceContext);
+  const {
+    bankTransactions,
+    isModalOn,
+  } = useContext(FinanceContext);
   const [transactions, setTransactions] = useState(null);
   const [isGettingData, setIsGettingData] = useState(true);
+
+  const history = useHistory();
 
   const getBalance = () => bankTransactions?.transaction?.reduce((acc, obj) => acc + obj.total, 0);
 
   useEffect(() => {
+    if (!bankTransactions) { history.push('/'); }
     setIsGettingData(true);
     setTransactions(bankTransactions?.transaction);
     setIsGettingData(false);

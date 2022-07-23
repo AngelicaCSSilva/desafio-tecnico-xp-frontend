@@ -8,8 +8,14 @@ top: 0;
 background-color: #111;
 padding-top: 2vh;
 width: 100vw;
-justify-content: flex-end;
-padding-right: 5vw;
+margin: 0 2vw;
+justify-content: space-between;
+& :first-child {
+  margin-left: 2vw;
+} 
+& :last-child {
+  margin-right: 3vw;
+}
 `;
 
 export default { StyledHeader };
