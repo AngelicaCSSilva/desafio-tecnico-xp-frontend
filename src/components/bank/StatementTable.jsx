@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
+import { CenteredTable } from '../divs/CenteredTable';
 import Loader from '../loader/Loader';
-import StatementTableHead from './StatementTableHead';
-import { StyledTable } from './styles/StyledTable.style';
+import StatementTableHead from './StatementTableHead'; import { StyledTable } from './styles/StyledTable.style';
 
 export default function StatementTable({ transactions }) {
   const [transactionsInfo, setTransactionsInfo] = useState(null);
@@ -15,7 +15,7 @@ export default function StatementTable({ transactions }) {
   }, [transactions]);
 
   return (
-    <div>
+    <CenteredTable>
       { isGettingData
         ? <Loader />
         : (
@@ -32,7 +32,7 @@ export default function StatementTable({ transactions }) {
             </tbody>
           </StyledTable>
         )}
-    </div>
+    </CenteredTable>
   );
 }
 
