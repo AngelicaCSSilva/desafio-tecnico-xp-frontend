@@ -1,11 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
+import FooterItem from './FooterItem';
+import { StyledFooter } from './styles/StyledFooter.style';
+import { StyledNav } from './styles/StyledNav.style';
 
 export default function Footer() {
   return (
-    <nav>
-      <Link to="/assets">Ações</Link>
-      <Link to="/bank">Conta</Link>
-    </nav>
+    <StyledFooter>
+      <StyledNav>
+        <FooterItem iconName="stocks" pageLink="assets" name="Ações" />
+        <FooterItem iconName="dollar" pageLink="bank" name="Conta Digital" />
+      </StyledNav>
+    </StyledFooter>
   );
 }
