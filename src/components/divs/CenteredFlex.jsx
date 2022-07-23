@@ -16,6 +16,9 @@ export const CenteredFlex = styled.div`
   & > main > h2 {
     align-self:flex-start;
   }
+  & > main > :last-child {
+    margin-bottom: 10vh;
+  }
 `;
 
 export default { CenteredFlex };
