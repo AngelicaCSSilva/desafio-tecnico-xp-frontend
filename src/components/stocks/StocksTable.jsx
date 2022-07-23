@@ -3,8 +3,11 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import FinanceContext from '../../context/FinanceContext';
 import OperationButton from '../button/OperationButton';
+import { CenteredTable } from '../divs/CenteredTable';
 import Loader from '../loader/Loader';
 import StocksTableHead from './StocksTableHead';
+import { StyledButtonsTd } from './styles/StyledButtonsTd';
+import { StyledTable } from './styles/StyledTable.style';
 
 export default function StocksTable({ stocks, isOnlyBuyOp }) {
   const { assets } = useContext(FinanceContext);
@@ -40,11 +43,11 @@ export default function StocksTable({ stocks, isOnlyBuyOp }) {
   }, [assets]);
 
   return (
-    <div>
+    <CenteredTable>
       { isFetchingData
         ? <Loader />
         : (
-          <table>
+          <StyledTable>
             <StocksTableHead />
             <tbody>
               {data?.results?.map((ticket) => (
@@ -56,20 +59,20 @@ export default function StocksTable({ stocks, isOnlyBuyOp }) {
                   <td>{ ticket.regularMarketPrice }</td>
                   { isOnlyBuyOp ? (
                     <td>
-                      <OperationButton operationType="Compra" isOrder ticket={ticket.symbol} />
+                      <OperationButton operationType="Compra" isPrimary isOrder ticket={ticket.symbol} />
                     </td>
                   ) : (
-                    <td>
-                      <OperationButton operationType="Compra" isOrder ticket={ticket.symbol} />
+                    <StyledButtonsTd>
+                      <OperationButton operationType="Compra" isPrimary isOrder ticket={ticket.symbol} />
                       <OperationButton operationType="Venda" isOrder ticket={ticket.symbol} />
-                    </td>
+                    </StyledButtonsTd>
                   )}
                 </tr>
               ))}
             </tbody>
-          </table>
+          </StyledTable>
         )}
-    </div>
+    </CenteredTable>
   );
 }
 
