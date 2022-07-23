@@ -5,7 +5,11 @@ import Balance from '../bank/Balance';
 import StatementTable from '../bank/StatementTable';
 import OperationButton from '../button/OperationButton';
 import { StyledButtonsDiv } from '../button/StyledButtonsDiv';
+import { CenteredFlex } from '../divs/CenteredFlex';
 import Footer from '../footer/Footer';
+import Header from '../header/Header';
+import { HeadingOne } from '../heading/HeadingOne.style';
+import { HeadingTwo } from '../heading/HeadingTwo.style';
 import Loader from '../loader/Loader';
 import Modal from '../modal/Modal';
 
@@ -21,25 +25,26 @@ export default function Bank() {
   }, [bankTransactions]);
 
   return (
-    <>
-      { isGettingData
-        ? <Loader />
-        : (
+    isGettingData
+      ? <CenteredFlex><Loader /></CenteredFlex>
+      : (
+        <CenteredFlex>
+          <Header />
           <main>
-            <h1>Bank</h1>
+            <HeadingOne>Conta Digital</HeadingOne>
             <Balance transactions={transactions} />
             <StyledButtonsDiv>
               <OperationButton operationType="Retirada" />
-              <OperationButton operationType="Depósito" />
+              <OperationButton isPrimary operationType="Depósito" />
             </StyledButtonsDiv>
-            <h2>Extrato bancário</h2>
+            <HeadingTwo>Extrato bancário</HeadingTwo>
             { transactions
               ? (<StatementTable transactions={transactions} />)
               : (<p>Não há movimentações bancárias.</p>)}
             {isModalOn && <Modal />}
           </main>
-        )}
-      <Footer />
-    </>
+          <Footer />
+        </CenteredFlex>
+      )
   );
 }

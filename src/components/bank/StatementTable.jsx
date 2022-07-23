@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import Loader from '../loader/Loader';
 import StatementTableHead from './StatementTableHead';
+import { StyledTable } from './styles/StyledTable.style';
 
 export default function StatementTable({ transactions }) {
   const [transactionsInfo, setTransactionsInfo] = useState(null);
@@ -15,22 +16,21 @@ export default function StatementTable({ transactions }) {
 
   return (
     <div>
-      {' '}
       { isGettingData
         ? <Loader />
         : (
-          <table>
+          <StyledTable>
             <StatementTableHead />
             <tbody>
               {transactionsInfo?.map((transaction) => (
                 <tr key={new Date(transaction?.date).getTime()}>
                   <td>{ new Date(transaction?.date).toLocaleDateString(['pt-br']) }</td>
                   <td>{ transaction?.description }</td>
-                  <td>{ transaction?.total }</td>
+                  <td>{ new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(transaction?.total) }</td>
                 </tr>
               ))}
             </tbody>
-          </table>
+          </StyledTable>
         )}
     </div>
   );

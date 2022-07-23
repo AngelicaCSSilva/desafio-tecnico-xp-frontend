@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const StyledButtonsDiv = styled.div`
+export const StyledButtonsTd = styled.td`
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: center;
   align-content: center;
-  width: 400px;
+  width: 12rem;
 `;
 
-export default { StyledButtonsDiv };
+export default { StyledButtonsTd };

@@ -4,8 +4,8 @@ import React, {
 
 import FinanceContext from '../../context/FinanceContext';
 import { StyledButtonsDiv } from '../button/StyledButtonsDiv';
-import { ModalContentForm } from './styles/ModalContentForm';
-import { StyledLabel } from './styles/StyledLabel';
+import { ModalContentForm } from './styles/ModalContentForm.style';
+import { StyledLabel } from './styles/StyledLabel.style';
 
 export default function ModalForm() {
   const {
@@ -147,6 +147,7 @@ export default function ModalForm() {
         <button
           type="button"
           onClick={handleCancelButton}
+          background="#9e7900"
         >
           Cancelar
         </button>
