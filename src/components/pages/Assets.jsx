@@ -19,6 +19,7 @@ export default function Assets() {
     generateGlobalState,
     userId,
     isModalOn,
+    allStocks,
     setToken,
     setUserEmail,
   } = useContext(FinanceContext);
@@ -35,7 +36,7 @@ export default function Assets() {
   }, [userId]);
 
   const userStocks = assets?.stocks?.map((stock) => stock.ticket);
-  const watchlistExclusives = assets?.watchlist?.filter((stock) => !userStocks.includes(stock));
+  const stocksExclusive = allStocks?.filter((stock) => !userStocks?.includes(stock));
 
   return (
     !userStocks
@@ -50,8 +51,8 @@ export default function Assets() {
               ? <StocksTable stocks={assets?.stocks?.map((stock) => stock.ticket)} />
               : <p>Você não possui ações.</p>}
             <HeadingTwo>Disponíveis para investir</HeadingTwo>
-            { watchlistExclusives.length >= 1
-              ? <StocksTable stocks={watchlistExclusives} isOnlyBuyOp />
+            { stocksExclusive?.length >= 1
+              ? <StocksTable stocks={stocksExclusive} isOnlyBuyOp />
               : <p>Não há novas ações disponíveis.</p>}
             {isModalOn && <Modal />}
           </main>
