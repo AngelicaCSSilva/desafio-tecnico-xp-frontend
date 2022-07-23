@@ -63,8 +63,8 @@ export default function StocksTable({ stocks, isOnlyBuyOp }) {
                     </td>
                   ) : (
                     <StyledButtonsTd>
-                      <OperationButton operationType="Compra" isPrimary isOrder ticket={ticket.symbol} />
                       <OperationButton operationType="Venda" isOrder ticket={ticket.symbol} />
+                      <OperationButton operationType="Compra" isPrimary isOrder ticket={ticket.symbol} />
                     </StyledButtonsTd>
                   )}
                 </tr>
