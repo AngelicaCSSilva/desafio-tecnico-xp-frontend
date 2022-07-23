@@ -7,6 +7,7 @@ position: fixed;
 width:100vw;
 bottom: 0;
 background-color: #111;
+padding-top: 2vh;
 `;
 
 export default { StyledFooter };
