@@ -120,7 +120,9 @@ export default function ModalForm() {
   const formatValue = (value) => {
     let newValue = value;
     newValue = newValue.replace(/,/, '.');
-    setModalValue(newValue);
+    if (!isOrder && newValue > maxValue) { setModalValue(maxValue); } else {
+      setModalValue(newValue);
+    }
   };
 
   useEffect(() => {
