@@ -5,7 +5,7 @@ import FinanceContext from '../../context/FinanceContext';
 import { StyledOperationButton } from './styles/StyledOperationButton.style';
 
 export default function OperationButton({
-  operationType, isOrder, ticket, isPrimary,
+  operationType, isOrder, ticket, isPrimary, isDisabled,
 }) {
   const {
     setIsOrder,
@@ -22,7 +22,7 @@ export default function OperationButton({
   };
 
   return (
-    <StyledOperationButton type="button" isPrimary={isPrimary} onClick={handleClick}>
+    <StyledOperationButton disabled={isDisabled} type="button" isPrimary={isPrimary} onClick={handleClick}>
       {operationType}
     </StyledOperationButton>
   );
@@ -32,6 +32,7 @@ OperationButton.defaultProps = {
   isOrder: false,
   ticket: null,
   isPrimary: false,
+  isDisabled: false,
 };
 
 OperationButton.propTypes = {
@@ -39,4 +40,5 @@ OperationButton.propTypes = {
   isOrder: PropTypes.bool,
   ticket: PropTypes.string,
   isPrimary: PropTypes.bool,
+  isDisabled: PropTypes.bool,
 };

@@ -4,7 +4,9 @@ import React, {
 
 import FinanceContext from '../../context/FinanceContext';
 import { StyledButtonsDiv } from '../button/StyledButtonsDiv';
+import { StyledOperationButton } from '../button/styles/StyledOperationButton.style';
 import { ModalContentForm } from './styles/ModalContentForm.style';
+import { StyledInput } from './styles/StyledInput.style';
 import { StyledLabel } from './styles/StyledLabel.style';
 
 export default function ModalForm() {
@@ -31,29 +33,27 @@ export default function ModalForm() {
     return orders.reduce((acc, obj) => acc + obj.qtd, 0);
   };
 
-  const handleBuyOrder = (ticketStock, stocksLessTicket, newOrder) => {
-    if (ticketStock().length < 1) {
+  const handleBuyOrder = (selectedStock, stocksLessSelected, newOrder, selectedIndex) => {
+    if (selectedStock().length < 1) {
       const newStock = {
         ticket: selectedTicket,
         orders: [newOrder],
       };
-      setAssets({ ...assets, stocks: [...stocksLessTicket, newStock] });
+      setAssets({ ...assets, stocks: [...stocksLessSelected, newStock] });
     } else {
-      const selectedStock = ticketStock()[0];
-      selectedStock.orders.push(newOrder);
-
-      setAssets({ ...assets, stocks: [...stocksLessTicket, selectedStock] });
+      const newAssets = assets;
+      newAssets.stocks[selectedIndex].orders.push(newOrder);
+      setAssets(newAssets);
     }
   };
 
-  const handleSellOrder = (ticketStock, stocksLessTicket, newOrder) => {
-    if (getOrdersSum() === 1) {
-      setAssets({ ...assets, stocks: [...stocksLessTicket] });
+  const handleSellOrder = (stocksLessSelected, newOrder, selectedIndex) => {
+    if (getOrdersSum() === qtdValue) {
+      setAssets({ ...assets, stocks: [...stocksLessSelected] });
     } else {
-      const selectedStock = ticketStock()[0];
-      selectedStock.orders.push(newOrder);
-
-      setAssets({ ...assets, stocks: [...stocksLessTicket, selectedStock] });
+      const newAssets = assets;
+      newAssets.stocks[selectedIndex].orders.push(newOrder);
+      setAssets(newAssets);
     }
   };
 
@@ -64,21 +64,24 @@ export default function ModalForm() {
     const date = new Date();
     const newOrder = { data: date.toISOString(), qtd: formatedQtd, value: formatedValue };
 
-    const ticketStock = () => assets?.stocks?.filter((stock) => stock.ticket === selectedTicket);
-    const stocksLessTicket = assets.stocks.filter((stock) => stock.ticket !== selectedTicket);
+    const selectedStock = () => assets?.stocks?.filter((stock) => stock.ticket === selectedTicket);
+    const stocksLessSelected = assets?.stocks?.filter((stock) => stock.ticket !== selectedTicket);
+    const selectedIndex = assets?.stocks?.findIndex((stock) => stock.ticket === selectedTicket);
 
     if (isSell) {
-      handleSellOrder(ticketStock, stocksLessTicket, newOrder);
+      handleSellOrder(stocksLessSelected, newOrder, selectedIndex);
     } else {
-      handleBuyOrder(ticketStock, stocksLessTicket, newOrder);
+      handleBuyOrder(selectedStock, stocksLessSelected, newOrder, selectedIndex);
     }
   };
 
   const handleTransaction = () => {
     const isDeposit = (operationType === 'Depósito');
-    const formatedValue = isDeposit ? modalValue : -Math.abs(modalValue);
+    const formatedValue = isDeposit
+      ? parseFloat(modalValue, 10)
+      : -Math.abs(parseFloat(modalValue, 10));
     const newTransaction = {
-      date: new Date(),
+      date: new Date().toISOString(),
       description: operationType,
       total: formatedValue,
     };
@@ -106,11 +109,27 @@ export default function ModalForm() {
     setIsModalOn(false);
   };
 
+  const handleQtdChange = (value) => {
+    if (value > maxQtd && isSell) {
+      setQtdValue(parseInt(maxQtd, 10));
+    } else {
+      setQtdValue(parseInt(value, 10));
+    }
+  };
+
+  const formatValue = (value) => {
+    let newValue = value;
+    newValue = newValue.replace(/,/, '.');
+    if (!isOrder && newValue > maxValue) { setModalValue(maxValue); } else {
+      setModalValue(newValue);
+    }
+  };
+
   useEffect(() => {
-    if (assets && bankTransactions) {
-      const balance = getBalance();
-      setMaxQtd(parseInt(balance / modalValue, 10));
-      setMaxValue(isOrder ? parseInt(balance / qtdValue, 10) : (modalValue + 1));
+    if (isOrder && isSell) {
+      setMaxQtd(getOrdersSum());
+    } else {
+      setMaxValue(getBalance());
     }
   }, [assets, bankTransactions]);
 
@@ -120,43 +139,44 @@ export default function ModalForm() {
       && (
       <StyledLabel htmlFor="qtdValue">
         Quantidade:
-        <input
+        <StyledInput
           type="number"
           min="1"
           max={maxQtd}
           step="1"
           value={qtdValue}
           name="qtdValue"
-          onChange={({ target: { value } }) => setQtdValue(value)}
+          onChange={({ target: { value } }) => handleQtdChange(value)}
         />
       </StyledLabel>
       )}
       <StyledLabel htmlFor="modalValue">
         Valor (R$):
-        <input
+        <StyledInput
           type="number"
           min="0"
-          max={maxValue}
-          step="1"
+          max={!isOrder ? maxValue : modalValue}
+          step="0.01"
           name="modalValue"
           value={modalValue}
-          onChange={({ target: { value } }) => setModalValue(value)}
+          onChange={({ target: { value } }) => formatValue(value)}
         />
       </StyledLabel>
       <StyledButtonsDiv>
-        <button
+        <StyledOperationButton
           type="button"
           onClick={handleCancelButton}
           background="#9e7900"
         >
           Cancelar
-        </button>
-        <button
+        </StyledOperationButton>
+        <StyledOperationButton
           type="button"
+          isPrimary
           onClick={handleConfirmButton}
         >
           Confirmar
-        </button>
+        </StyledOperationButton>
       </StyledButtonsDiv>
     </ModalContentForm>
   );
