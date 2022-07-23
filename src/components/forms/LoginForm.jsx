@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import FinanceContext from '../../context/FinanceContext';
 import { getLocalStorage, saveLocalStorage } from '../../utils/localStorage';
+import { StyledLoginButton } from '../button/styles/StyledLoginButton.style';
 import { CenteredForm } from './styles/CenteredForm.style';
 import { StyledInput } from './styles/StyledInput.style';
 import { StyledLabel } from './styles/StyledLabel.style';
@@ -55,13 +56,13 @@ export default function LoginForm() {
             }
         />
       </StyledLabel>
-      <button
+      <StyledLoginButton
         type="button"
         disabled={validateForm()}
         onClick={handleClickButton}
       >
-        Acessar
-      </button>
+        ACESSAR
+      </StyledLoginButton>
     </CenteredForm>
   );
 }
