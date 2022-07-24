@@ -26,9 +26,9 @@ O deploy foi realizado no Vercel e pode ser acessado pelo link [desafio-tecnico-
 
 ## Prévia
 <div align="center">
-<img src='https://user-images.githubusercontent.com/51302207/180629551-50d8db22-fe87-496d-9442-501402794611.png' height=500px />
-<img src='https://user-images.githubusercontent.com/51302207/180629568-090a8b9b-f6df-49ec-bfa8-4c89ab2ed621.png' height=500px />
-<img src='https://user-images.githubusercontent.com/51302207/180629593-52583648-4637-4c9e-88b5-d792171db066.png' height=500px />
+<img src='https://user-images.githubusercontent.com/51302207/180629551-50d8db22-fe87-496d-9442-501402794611.png' height=300px />
+<img src='https://user-images.githubusercontent.com/51302207/180629568-090a8b9b-f6df-49ec-bfa8-4c89ab2ed621.png' height=300px />
+<img src='https://user-images.githubusercontent.com/51302207/180629593-52583648-4637-4c9e-88b5-d792171db066.png' height=300px />
 
 </div>
 
