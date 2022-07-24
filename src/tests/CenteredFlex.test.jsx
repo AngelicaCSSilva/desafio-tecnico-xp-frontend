@@ -4,8 +4,8 @@ import React from 'react';
 
 import { CenteredFlex } from '../components/divs/CenteredFlex';
 
-describe('Footer test.', () => {
-  it('If Footer has link "Ações"', () => {
+describe('Centered Flex div test.', () => {
+  it('If Centered Flex div renders.', () => {
     render(<CenteredFlex data-testid="testid" />);
     const linkAcoes = screen.getByTestId('testid');
     expect(linkAcoes).toBeInTheDocument();
