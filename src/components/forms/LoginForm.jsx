@@ -59,7 +59,7 @@ export default function LoginForm() {
   return (
     <CenteredForm onSubmit={handleSubmit}>
       <StyledLabel htmlFor="email">
-        Email:
+        E-mail:
         <StyledInput
           id="email"
           type="text"

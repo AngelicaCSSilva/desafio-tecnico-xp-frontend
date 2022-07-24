@@ -8,8 +8,8 @@ import Footer from '../components/footer/Footer';
 describe('Footer test.', () => {
   it('If Footer has link "Ações"', () => {
     render(<Footer />, { wrapper: BrowserRouter });
-    const linkAcoes = screen.getByRole('link', { name: /Ações/i });
-    expect(linkAcoes).toBeInTheDocument();
+    const linkInvestimentos = screen.getByRole('link', { name: /Investimentos/i });
+    expect(linkInvestimentos).toBeInTheDocument();
   });
 
   it('If Footer has link "Conta"', () => {

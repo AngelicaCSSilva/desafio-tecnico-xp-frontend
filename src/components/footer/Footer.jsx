@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <StyledFooter>
       <StyledNav>
-        <FooterItem iconName="stocks" pageLink="assets" name="Ações" />
+        <FooterItem iconName="stocks" pageLink="assets" name="Investimentos" />
         <FooterItem iconName="dollar" pageLink="bank" name="Conta Digital" />
       </StyledNav>
     </StyledFooter>

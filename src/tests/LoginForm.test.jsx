@@ -9,7 +9,7 @@ import LoginForm from '../components/forms/LoginForm';
 describe('Login Form test.', () => {
   it('Must have an email input.', () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
-    const emailInput = screen.getByRole('textbox', { id: /email/i });
+    const emailInput = screen.getByRole('textbox', { id: /e-mail/i });
     expect(emailInput).toBeInTheDocument();
   });
 
@@ -35,7 +35,7 @@ describe('Login Form test.', () => {
   + 'when entering invalid information.', async () => {
     render(<LoginForm />, { wrapper: BrowserRouter });
 
-    const emailInput = screen.getByLabelText('Email:');
+    const emailInput = screen.getByLabelText('E-mail:');
     await user.type(emailInput, 'aaa.co@m');
 
     const passwordInput = screen.getByLabelText('Senha:');
@@ -54,7 +54,7 @@ describe('Login Form test.', () => {
     const enterButton = screen.getByRole('button', { name: /Acessar/i });
     expect(enterButton).toBeDisabled();
 
-    const emailInput = screen.getByLabelText('Email:');
+    const emailInput = screen.getByLabelText('E-mail:');
     await user.type(emailInput, 'teste@xp.com');
 
     const passwordInput = screen.getByLabelText('Senha:');

@@ -13,7 +13,7 @@ describe('App page test.', () => {
     render(<App />, { wrapper: BrowserRouter });
     const enterButton = screen.getByRole('button', { name: /Acessar/i });
 
-    const emailInput = screen.getByLabelText('Email:');
+    const emailInput = screen.getByLabelText('E-mail:');
     await user.type(emailInput, 'teste@xp.com');
 
     const passwordInput = screen.getByLabelText('Senha:');
