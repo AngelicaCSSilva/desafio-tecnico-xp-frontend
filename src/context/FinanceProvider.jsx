@@ -18,18 +18,6 @@ function FinanceProvider({ children }) {
   const [operationType, setOperationType] = useState('Compra');
   const [selectedTicket, setSelectedTicket] = useState(null);
 
-  const getUserId = async () => {
-    const url = 'https://desafiobackend-angelica.herokuapp.com/users';
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setUserId(data?.filter((user) => user.email === userEmail)[0]?.userId);
-      setuserName(data?.filter((user) => user.email === userEmail)[0]?.name);
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
-
   const getAllStocks = async () => {
     const url = 'https://desafiobackend-angelica.herokuapp.com/allstocks';
     try {
