@@ -5,18 +5,20 @@ import FinanceContext from '../../context/FinanceContext';
 import { StyledOperationButton } from './styles/StyledOperationButton.style';
 
 export default function OperationButton({
-  operationType, isOrder, ticket, isPrimary, isDisabled,
+  operationType, isOrder, ticker, isPrimary, isDisabled, stockValue,
 }) {
   const {
     setIsOrder,
     setOperationType,
     setIsModalOn,
     setSelectedTicket,
+    setSelectedStockValue,
   } = useContext(FinanceContext);
 
   const handleClick = () => {
     setIsOrder(isOrder);
-    setSelectedTicket(ticket);
+    setSelectedStockValue(stockValue);
+    setSelectedTicket(ticker);
     setOperationType(operationType);
     setIsModalOn(true);
   };
@@ -30,7 +32,8 @@ export default function OperationButton({
 
 OperationButton.defaultProps = {
   isOrder: false,
-  ticket: null,
+  ticker: null,
+  stockValue: 0,
   isPrimary: false,
   isDisabled: false,
 };
@@ -38,7 +41,8 @@ OperationButton.defaultProps = {
 OperationButton.propTypes = {
   operationType: PropTypes.string.isRequired,
   isOrder: PropTypes.bool,
-  ticket: PropTypes.string,
+  ticker: PropTypes.string,
   isPrimary: PropTypes.bool,
   isDisabled: PropTypes.bool,
+  stockValue: PropTypes.number,
 };
