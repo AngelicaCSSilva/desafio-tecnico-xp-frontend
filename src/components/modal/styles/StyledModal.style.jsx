@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledModal = styled.div`
   position: fixed; 
   z-index: 1; 
-  padding-top: 50vh; 
+  padding-top: 30vh; 
   left: 0;
   top: 0;
   width: 100vw;
