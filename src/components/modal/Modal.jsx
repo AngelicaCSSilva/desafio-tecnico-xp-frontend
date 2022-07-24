@@ -5,7 +5,7 @@ import { StyledModal } from './styles/StyledModal.style';
 
 export default function Modal() {
   return (
-    <StyledModal>
+    <StyledModal data-testid="modal-container">
       <ModalForm />
     </StyledModal>
   );
