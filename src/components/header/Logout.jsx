@@ -6,12 +6,12 @@ import { clearSessionStorage } from '../../utils/sessionStorage';
 import { StyledLogoutButton } from '../button/styles/StyledLogout.style';
 
 export default function Logout() {
-  const { setToken } = useContext(FinanceContext);
+  const { deleteData } = useContext(FinanceContext);
 
   const history = useHistory();
 
   const handleLogout = () => {
-    setToken(null);
+    deleteData();
     clearSessionStorage();
     history.push('/');
   };
