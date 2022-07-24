@@ -1,13 +1,14 @@
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 
+import { getSessionStorage } from '../utils/sessionStorage';
 import FinanceContext from './FinanceContext';
 
 function FinanceProvider({ children }) {
   const [bankTransactions, setBankTransactions] = useState(null);
   const [assets, setAssets] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
-  const [userName, setuserName] = useState(null);
+  const [userName, setUserName] = useState(null);
   const [userId, setUserId] = useState(null);
   const [isFetching, setIsFetching] = useState(true);
   const [allStocks, setAllStocks] = useState(null);
@@ -40,6 +41,16 @@ function FinanceProvider({ children }) {
     }
   };
 
+  const getUserName = () => {
+    const name = getSessionStorage('userName');
+    setUserName(name);
+  };
+
+  const getUserId = () => {
+    const id = getSessionStorage('userId');
+    setUserId(id);
+  };
+
   const getBankTransitions = async () => {
     const url = `https://desafiobackend-angelica.herokuapp.com/${userId}/bankTransactions`;
     try {
@@ -59,7 +70,7 @@ function FinanceProvider({ children }) {
     setBankTransactions(null);
     setUserEmail(null);
     setAssets(null);
-    setuserName(null);
+    setUserName(null);
     setUserId(null);
     setAllStocks(null);
     setToken(null);
@@ -73,8 +84,10 @@ function FinanceProvider({ children }) {
   useEffect(() => {
     if (!userId && userEmail) {
       getUserId();
+      getUserName();
     }
     if (userId) {
+      getUserName();
       getInvestments();
       getAllStocks();
       getBankTransitions();
@@ -107,6 +120,8 @@ function FinanceProvider({ children }) {
         token,
         setToken,
         deleteData,
+        setUserId,
+        setUserName,
       }}
     >
       {children}
