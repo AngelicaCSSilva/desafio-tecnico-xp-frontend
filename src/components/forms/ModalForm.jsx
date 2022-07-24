@@ -130,7 +130,7 @@ export default function ModalForm() {
     } if (isDeposit) {
       setMaxValue(1000000);
     } else {
-      setMaxValue(Number(getBalance().toFixed(2)));
+      setMaxValue(Number(getBalance()?.toFixed(2)));
     }
   }, [assets, bankTransactions]);
 
