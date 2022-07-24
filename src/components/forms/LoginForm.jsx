@@ -11,7 +11,12 @@ import { StyledInput } from './styles/StyledInput.style';
 import { StyledLabel } from './styles/StyledLabel.style';
 
 export default function LoginForm() {
-  const { setUserEmail, setToken } = useContext(FinanceContext);
+  const {
+    setUserEmail,
+    setToken,
+    setUserId,
+    setUserName,
+  } = useContext(FinanceContext);
   const [error, setError] = useState(null);
 
   const history = useHistory();
@@ -44,8 +49,12 @@ export default function LoginForm() {
       setError(data.detail);
     } else {
       setToken(data.access_token);
+      setUserId(data.user_id);
+      setUserName(data.user_name);
       saveLocalStorage('lastUser', { email: user.email, lastLogin: new Date().toISOString() });
       saveSessionStorage('token', data.access_token);
+      saveSessionStorage('userId', data.user_id);
+      saveSessionStorage('userName', data.user_name);
       setUserEmail(user.email);
       history.push('/assets');
     }
