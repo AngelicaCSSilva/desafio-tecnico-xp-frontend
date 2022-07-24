@@ -16,10 +16,10 @@ export default function StocksTable({ stocks, isOnlyBuyOp }) {
 
   const isFII = (shortname) => shortname.includes('FII');
   const userInvestments = assets?.stocks;
-  const defineQuantity = (ticket) => (isFII(ticket.shortName) ? 1 : 100);
+  const defineQuantity = (ticker) => (isFII(ticker.shortName) ? 1 : 100);
 
   const getOrdersSum = (ticketName) => {
-    const assset = userInvestments.find(({ ticket }) => ticket === ticketName);
+    const assset = userInvestments.find(({ ticker }) => ticker === ticketName);
     if (!assset) return 0;
     return assset.orders.reduce((acc, obj) => acc + obj.qtd, 0);
   };
@@ -50,21 +50,21 @@ export default function StocksTable({ stocks, isOnlyBuyOp }) {
           <StyledTable>
             <StocksTableHead />
             <tbody>
-              {data?.results?.map((ticket) => (
-                <tr key={ticket.symbol}>
-                  <td>{ ticket.symbol }</td>
+              {data?.results?.map((ticker) => (
+                <tr key={ticker.symbol}>
+                  <td>{ ticker.symbol }</td>
                   { isOnlyBuyOp
-                    ? (<td>{ defineQuantity(ticket) }</td>)
-                    : (<td>{ getOrdersSum(ticket.symbol) }</td>)}
-                  <td>{ ticket.regularMarketPrice }</td>
+                    ? (<td>{ defineQuantity(ticker) }</td>)
+                    : (<td>{ getOrdersSum(ticker.symbol) }</td>)}
+                  <td>{ ticker.regularMarketPrice }</td>
                   { isOnlyBuyOp ? (
                     <td>
-                      <OperationButton operationType="Compra" isPrimary isOrder ticket={ticket.symbol} />
+                      <OperationButton operationType="Compra" isPrimary isOrder ticker={ticker.symbol} stockValue={ticker.regularMarketPrice} />
                     </td>
                   ) : (
                     <StyledButtonsTd>
-                      <OperationButton operationType="Venda" isOrder ticket={ticket.symbol} />
-                      <OperationButton operationType="Compra" isPrimary isOrder ticket={ticket.symbol} />
+                      <OperationButton operationType="Venda" isOrder ticker={ticker.symbol} stockValue={ticker.regularMarketPrice} />
+                      <OperationButton operationType="Compra" isPrimary isOrder ticker={ticker.symbol} stockValue={ticker.regularMarketPrice} />
                     </StyledButtonsTd>
                   )}
                 </tr>

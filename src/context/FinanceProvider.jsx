@@ -18,6 +18,7 @@ function FinanceProvider({ children }) {
   const [isOrder, setIsOrder] = useState(true);
   const [operationType, setOperationType] = useState('Compra');
   const [selectedTicket, setSelectedTicket] = useState(null);
+  const [selectedStockValue, setSelectedStockValue] = useState(0);
 
   const getAllStocks = async () => {
     const url = 'https://desafiobackend-angelica.herokuapp.com/allstocks';
@@ -122,6 +123,8 @@ function FinanceProvider({ children }) {
         deleteData,
         setUserId,
         setUserName,
+        selectedStockValue,
+        setSelectedStockValue,
       }}
     >
       {children}

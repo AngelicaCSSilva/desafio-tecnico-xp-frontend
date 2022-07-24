@@ -19,6 +19,7 @@ export default function ModalForm() {
     operationType,
     isOrder,
     selectedTicket,
+    selectedStockValue,
   } = useContext(FinanceContext);
   const [modalValue, setModalValue] = useState(1);
   const [qtdValue, setQtdValue] = useState(1);
@@ -30,14 +31,14 @@ export default function ModalForm() {
   const isDeposit = (operationType === 'Depósito');
 
   const getOrdersSum = () => {
-    const { orders } = assets.stocks.find(({ ticket }) => ticket === selectedTicket);
+    const { orders } = assets.stocks.find(({ ticker }) => ticker === selectedTicket);
     return orders.reduce((acc, obj) => acc + obj.qtd, 0);
   };
 
   const handleBuyOrder = (selectedStock, stocksLessSelected, newOrder, selectedIndex) => {
     if (selectedStock().length < 1) {
       const newStock = {
-        ticket: selectedTicket,
+        ticker: selectedTicket,
         orders: [newOrder],
       };
       setAssets({ ...assets, stocks: [...stocksLessSelected, newStock] });
@@ -65,9 +66,9 @@ export default function ModalForm() {
     const date = new Date();
     const newOrder = { data: date.toISOString(), qtd: formatedQtd, value: formatedValue };
 
-    const selectedStock = () => assets?.stocks?.filter((stock) => stock.ticket === selectedTicket);
-    const stocksLessSelected = assets?.stocks?.filter((stock) => stock.ticket !== selectedTicket);
-    const selectedIndex = assets?.stocks?.findIndex((stock) => stock.ticket === selectedTicket);
+    const selectedStock = () => assets?.stocks?.filter((stock) => stock.ticker === selectedTicket);
+    const stocksLessSelected = assets?.stocks?.filter((stock) => stock.ticker !== selectedTicket);
+    const selectedIndex = assets?.stocks?.findIndex((stock) => stock.ticker === selectedTicket);
 
     if (isSell) {
       handleSellOrder(stocksLessSelected, newOrder, selectedIndex);
@@ -125,6 +126,9 @@ export default function ModalForm() {
   };
 
   useEffect(() => {
+    if (isOrder) {
+      setModalValue(selectedStockValue);
+    }
     if (isOrder && isSell) {
       setMaxQtd(getOrdersSum());
     } if (isDeposit) {

@@ -35,7 +35,7 @@ export default function Assets() {
     }
   }, [userId]);
 
-  const userStocks = assets?.stocks?.map((stock) => stock.ticket);
+  const userStocks = assets?.stocks?.map((stock) => stock.ticker);
   const stocksExclusive = allStocks?.filter((stock) => !userStocks?.includes(stock));
 
   return (
@@ -48,7 +48,7 @@ export default function Assets() {
             <HeadingOne>Investimentos</HeadingOne>
             <HeadingTwo>Minhas ações</HeadingTwo>
             { assets?.stocks?.length >= 1
-              ? <StocksTable stocks={assets?.stocks?.map((stock) => stock.ticket)} />
+              ? <StocksTable stocks={assets?.stocks?.map((stock) => stock.ticker)} />
               : <p>Você não possui ações.</p>}
             <HeadingTwo>Disponíveis para investir</HeadingTwo>
             { stocksExclusive?.length >= 1
