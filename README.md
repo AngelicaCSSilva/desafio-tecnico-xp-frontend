@@ -45,12 +45,12 @@ O deploy foi realizado no Vercel e pode ser acessado pelo link [desafio-tecnico-
 
 - Foi criado um formulário de submit com os campos de e-mail e senha. É realizada uma validação destes campos, onde o e-mail deve ter a estrutura **"xx@xx.xx"** e a senha deve possuir **mais de seis caracteres**.
 - Após o usuário inserir os dados válidos, o botão de "Acessar" será liberado para uso.
-- Ao clicar no botão, a aplicação irá enviar os dados para uma API própria, onde será conferido se o usuário existe e se aquela é a senha dele. Caso esteja tudo certo, a API retornará um `TOKEN`.
+- Ao clicar no botão, a aplicação irá enviar os dados para uma API própria, onde será conferido se o usuário existe e se aquela é a senha dele. Caso esteja tudo certo, a API retornará um `TOKEN`, `USER ID` e `USER NAME`.
     - Caso os dados fornecidos estejam incorretos e/ou não constem no banco de dados, a API retorna uma HTTPException com codigo 401 e detalhes. O detalhe da exceção (E-mail e/ou senha inválidos) é exibido na tela. 
 
 > Cabe destacar que não foi implementado um sistema de verificação do TOKEN na API.
 > 
-- Após receber o `TOKEN`, a aplicação irá salvá-la no `Session Storage`.
+- A aplicação irá salvar o `TOKEN`, `USER ID` e `USER NAME` no `Session Storage`.
 - O e-mail e data/horário deste acesso serão gravados no `Local Storage`.
 - Caso o usuário acesse novamente a página após deslogar ou fechar o navegador, o último e-mail inserido será mostrado no campo `e-mail`.
 
