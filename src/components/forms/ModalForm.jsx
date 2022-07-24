@@ -27,6 +27,7 @@ export default function ModalForm() {
   const [maxValue, setMaxValue] = useState(0);
 
   const isSell = (operationType === 'Venda');
+  const isDeposit = (operationType === 'Depósito');
 
   const getOrdersSum = () => {
     const { orders } = assets.stocks.find(({ ticket }) => ticket === selectedTicket);
@@ -76,7 +77,6 @@ export default function ModalForm() {
   };
 
   const handleTransaction = () => {
-    const isDeposit = (operationType === 'Depósito');
     const formatedValue = isDeposit
       ? parseFloat(modalValue, 10)
       : -Math.abs(parseFloat(modalValue, 10));
@@ -118,8 +118,7 @@ export default function ModalForm() {
   };
 
   const formatValue = (value) => {
-    let newValue = value;
-    newValue = newValue.replace(/,/, '.');
+    const newValue = Number(parseFloat(value).toFixed(2));
     if (!isOrder && newValue > maxValue) { setModalValue(maxValue); } else {
       setModalValue(newValue);
     }
@@ -128,8 +127,10 @@ export default function ModalForm() {
   useEffect(() => {
     if (isOrder && isSell) {
       setMaxQtd(getOrdersSum());
+    } if (isDeposit) {
+      setMaxValue(1000000);
     } else {
-      setMaxValue(getBalance());
+      setMaxValue(Number(getBalance().toFixed(2)));
     }
   }, [assets, bankTransactions]);
 
