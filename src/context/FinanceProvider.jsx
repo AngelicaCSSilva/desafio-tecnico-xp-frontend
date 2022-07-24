@@ -67,6 +67,21 @@ function FinanceProvider({ children }) {
     getUserId();
   };
 
+  const deleteData = () => {
+    setBankTransactions(null);
+    setUserEmail(null);
+    setAssets(null);
+    setuserName(null);
+    setUserId(null);
+    setAllStocks(null);
+    setToken(null);
+    setIsModalOn(false);
+    setIsOrder(true);
+    setOperationType('Compra');
+    setSelectedTicket(null);
+    setIsFetching(true);
+  };
+
   useEffect(() => {
     if (!userId && userEmail) {
       getUserId();
@@ -103,6 +118,7 @@ function FinanceProvider({ children }) {
         allStocks,
         token,
         setToken,
+        deleteData,
       }}
     >
       {children}
