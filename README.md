@@ -22,7 +22,7 @@ Para instalar a aplicação localmente:
 
 ## Deploy
 
-O deploy foi realizado no Vercel e pode ser acessado pelo link [desafio-tecnico-xp-angelica.vercel.app](desafio-tecnico-xp-angelica.vercel.app)
+O deploy foi realizado no Vercel e pode ser acessado pelo link [desafio-tecnico-xp-angelica.vercel.app](https://desafio-tecnico-xp-angelica.vercel.app)
 
 ## Prévia
 <div align="center">
